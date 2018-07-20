@@ -22,7 +22,7 @@ JunosSpaceJS.prototype = Object.extendsObject(AProbe, {
 	// test the connection with the Junos Space Server
 	testConnection : function() {
 		
-		ms.log("JunosSpaceJS testing connection");
+		ms.log("Junos Space testing connection");
 		
 		var retVal = {};
 		var query = '/api/space/opennms/alarms?limit=1';
@@ -32,7 +32,7 @@ JunosSpaceJS.prototype = Object.extendsObject(AProbe, {
 			retVal['error_message'] = errorMessage;
 			return retVal;
 		}
-		ms.log('JunosSpaceJS Connector Testing Connection response:' + response);		 
+		ms.log('Junos Space Connector Testing Connection response:' + response);		 
 		ms.log('result:' + response.getStatusCode());
 		if (response.getStatusCode() === 200){
 			retVal['status']  = SUCCESS.toString();
@@ -52,7 +52,7 @@ JunosSpaceJS.prototype = Object.extendsObject(AProbe, {
 
 execute: function() {
 	
-	ms.log("JunosSpaceJS Connector Connector: execute connection ...");
+	ms.log("Junos Space Connector Connector: execute connection ...");
 	
 	var retVal = {};
 	
@@ -178,6 +178,12 @@ getQueryForExecute : function () {
 	return query;
 },
 
+getResponse: function(query) {
+	//return parsed response according to the query type (such as REST or DB);
+	
+	// for example: return this.getResponseJSON(query);
+},
+
 getURL : function (host, query) {
 	//var port =  this.probe.getAdditionalParameter("port"); //retrieve all additional parameters unique to this Source
 	
@@ -209,32 +215,6 @@ createRequest: function(query) {
 	// return request;
 },
 
-getResponse: function(query) {
-	//return parsed response according to the query type (such as REST or DB);
-	
-	// for example: return this.getResponseJSON(query);
-
-	var request = this.createRequest(query);
-	var response = request.get();
-	if (response == null)
-		this.addError(request.getErrorMessage());
-	return response;
-},
-
-//helper method - creates HTTP request and returns the response as XML string
-getResponseFromQuery: function(startTime) {
-	var request = this.createRequest(query);
-
-	var query = '/api/space/opennms/alarms?limit=1';
-
-	request.addHeader('Content-Type','application/xml');
-	request.addHeader('Accept','application/xml');
-	var response = request.post(getXmlString());
-	if (response == null)
-		this.addError(request.getErrorMessage());
-	return response;
-},
-
 getResult : function (query) {
 	
 	//Run the query
@@ -248,7 +228,13 @@ return response; // if needed, parse the response before returning. For example,
 
 },
 
-
+addError : function(message){
+	if (errorMessage === "")
+		errorMessage = message;
+	else
+		errorMessage += "\n" + message;
+	ms.log(message);
+},
 
 //helper method - creates HTTP request and returns the response as JSON string
 getResponseJSON: function(query) {
@@ -260,7 +246,16 @@ getResponseJSON: function(query) {
 	return response;
 },
 
-
+//helper method - creates HTTP request and returns the response as XML string
+getResponseXML: function(query) {
+	var request = this.createRequest(query);
+	request.addHeader('Content-Type','application/xml');
+	request.addHeader('Accept','application/xml');
+	var response = request.post(getXmlString());
+	if (response == null)
+		this.addError(request.getErrorMessage());
+	return response;
+},
 
 //helper method - returns the suitable XML string
 getXmlString: function() {
@@ -276,16 +271,7 @@ parseToJSON : function (response) {
 	return resultJson;
 	
 },
-
-addError : function(message){
-	if (errorMessage === "")
-		errorMessage = message;
-	else
-		errorMessage += "\n" + message;
-	ms.log(message);
-},
-
 	
-type: "JunosSpaceJS"
+type: "ConnectorJS"
 });
 

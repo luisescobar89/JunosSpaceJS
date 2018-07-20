@@ -15,7 +15,7 @@ var GUEST_IP = "guest_ip_address";
 var HOST_IP = "ip_address";
 var MAC = "mac_address";
 var RESOURCE_NAME = "resourceName";
-var errorMessage = "test";
+var errorMessage = "";
 
 vRealizeJS.prototype = Object.extendsObject(AProbe, {
 
