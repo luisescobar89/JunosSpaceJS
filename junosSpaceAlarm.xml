@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alarms count="1" totalCount="1472">
+  <alarm type="3" count="2263803" id="1898466" severity="WARNING">
+    <description>&lt;p&gt;An ospfIfConfigError  trap  signifies  that  apacket  has  been received on a non-virtual in-terface  from  a  router  whose   configurationparameters  conflict  with this router's confi-guration parameters.  Note that the  event  op-tionMismatch  should  cause  a  trap only if itprevents an adjacency from forming.&lt;/p&gt;&lt;table&gt;	&lt;tr&gt;&lt;td&gt;&lt;b&gt;	ospfRouterId&lt;/b&gt;&lt;/td&gt;&lt;td&gt;	10.255.177.23;&lt;/td&gt;&lt;td&gt;&lt;p;&gt;&lt;/p&gt;&lt;/td;&gt;&lt;/tr&gt;	&lt;tr&gt;&lt;td&gt;&lt;b&gt;	ospfIfIpAddress&lt;/b&gt;&lt;/td&gt;&lt;td&gt;	10.255.249.46;&lt;/td&gt;&lt;td&gt;&lt;p;&gt;&lt;/p&gt;&lt;/td;&gt;&lt;/tr&gt;	&lt;tr&gt;&lt;td&gt;&lt;b&gt;	ospfAddressLessIf&lt;/b&gt;&lt;/td&gt;&lt;td&gt;	0;&lt;/td&gt;&lt;td&gt;&lt;p;&gt;&lt;/p&gt;&lt;/td;&gt;&lt;/tr&gt;	&lt;tr&gt;&lt;td&gt;&lt;b&gt;	ospfPacketSrc&lt;/b&gt;&lt;/td&gt;&lt;td&gt;	10.1.10.250;&lt;/td&gt;&lt;td&gt;&lt;p;&gt;&lt;/p&gt;&lt;/td;&gt;&lt;/tr&gt;	&lt;tr&gt;&lt;td&gt;&lt;b&gt;	ospfConfigErrorType&lt;/b&gt;&lt;/td&gt;&lt;td&gt;	7;&lt;/td&gt;&lt;td&gt;&lt;p;&gt;		badVersion(1)		areaMismatch(2)		unknownNbmaNbr(3)		unknownVirtualNbr(4)		authTypeMismatch(5)		authFailure(6)		netMaskMismatch(7)		helloIntervalMismatch(8)		deadIntervalMismatch(9)		optionMismatch(10)	&lt;/p&gt;&lt;/td;&gt;&lt;/tr&gt;	&lt;tr&gt;&lt;td&gt;&lt;b&gt;	ospfPacketType&lt;/b&gt;&lt;/td&gt;&lt;td&gt;	1;&lt;/td&gt;&lt;td&gt;&lt;p;&gt;		hello(1)		dbDescript(2)		lsReq(3)		lsUpdate(4)		lsAck(5)	&lt;/p&gt;&lt;/td;&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+    <parms>.1.3.6.1.2.1.14.1.1.0=10.255.177.23(IpAddress,text);.1.3.6.1.2.1.14.7.1.1.10.255.249.46.0=10.255.249.46(IpAddress,text);.1.3.6.1.2.1.14.7.1.2.10.255.249.46.0=0(Int32,text);.1.3.6.1.2.1.14.16.1.4.0=10.1.10.250(IpAddress,text);.1.3.6.1.2.1.14.16.1.2.0=7(Int32,text);.1.3.6.1.2.1.14.16.1.3.0=1(Int32,text);.1.3.6.1.6.3.1.1.4.3.0=.1.3.6.1.4.1.2636.1.1.1.2.109(ObjectIdentifier,text)</parms>
+    <firstEventTime>2018-06-09T00:24:11Z</firstEventTime>
+    <ipAddress>10.255.177.23</ipAddress>
+    <lastEvent display="Y" log="Y" id="52779866" severity="WARNING">
+      <createTime>2018-07-20T18:58:01.050Z</createTime>
+      <description>&lt;p&gt;An ospfIfConfigError  trap  signifies  that  apacket  has  been received on a non-virtual in-terface  from  a  router  whose   configurationparameters  conflict  with this router's confi-guration parameters.  Note that the  event  op-tionMismatch  should  cause  a  trap only if itprevents an adjacency from forming.&lt;/p&gt;&lt;table&gt;	&lt;tr&gt;&lt;td&gt;&lt;b&gt;	ospfRouterId&lt;/b&gt;&lt;/td&gt;&lt;td&gt;	10.255.177.23;&lt;/td&gt;&lt;td&gt;&lt;p;&gt;&lt;/p&gt;&lt;/td;&gt;&lt;/tr&gt;	&lt;tr&gt;&lt;td&gt;&lt;b&gt;	ospfIfIpAddress&lt;/b&gt;&lt;/td&gt;&lt;td&gt;	10.255.249.46;&lt;/td&gt;&lt;td&gt;&lt;p;&gt;&lt;/p&gt;&lt;/td;&gt;&lt;/tr&gt;	&lt;tr&gt;&lt;td&gt;&lt;b&gt;	ospfAddressLessIf&lt;/b&gt;&lt;/td&gt;&lt;td&gt;	0;&lt;/td&gt;&lt;td&gt;&lt;p;&gt;&lt;/p&gt;&lt;/td;&gt;&lt;/tr&gt;	&lt;tr&gt;&lt;td&gt;&lt;b&gt;	ospfPacketSrc&lt;/b&gt;&lt;/td&gt;&lt;td&gt;	10.1.10.250;&lt;/td&gt;&lt;td&gt;&lt;p;&gt;&lt;/p&gt;&lt;/td;&gt;&lt;/tr&gt;	&lt;tr&gt;&lt;td&gt;&lt;b&gt;	ospfConfigErrorType&lt;/b&gt;&lt;/td&gt;&lt;td&gt;	7;&lt;/td&gt;&lt;td&gt;&lt;p;&gt;		badVersion(1)		areaMismatch(2)		unknownNbmaNbr(3)		unknownVirtualNbr(4)		authTypeMismatch(5)		authFailure(6)		netMaskMismatch(7)		helloIntervalMismatch(8)		deadIntervalMismatch(9)		optionMismatch(10)	&lt;/p&gt;&lt;/td;&gt;&lt;/tr&gt;	&lt;tr&gt;&lt;td&gt;&lt;b&gt;	ospfPacketType&lt;/b&gt;&lt;/td&gt;&lt;td&gt;	1;&lt;/td&gt;&lt;td&gt;&lt;p;&gt;		hello(1)		dbDescript(2)		lsReq(3)		lsUpdate(4)		lsAck(5)	&lt;/p&gt;&lt;/td;&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+      <host>txhou2ds01-f15.aon.com</host>
+      <logMessage>&lt;p&gt;			ospfIfConfigError trap received 			ospfRouterId=10.255.177.23 			ospfIfIpAddress=10.255.249.46 			ospfAddressLessIf=0 			ospfPacketSrc=10.1.10.250 			ospfConfigErrorType=7 			ospfPacketType=1&lt;/p&gt;</logMessage>
+      <parms>.1.3.6.1.2.1.14.1.1.0=10.255.177.23(IpAddress,text);.1.3.6.1.2.1.14.7.1.1.10.255.249.46.0=10.255.249.46(IpAddress,text);.1.3.6.1.2.1.14.7.1.2.10.255.249.46.0=0(Int32,text);.1.3.6.1.2.1.14.16.1.4.0=10.1.10.250(IpAddress,text);.1.3.6.1.2.1.14.16.1.2.0=7(Int32,text);.1.3.6.1.2.1.14.16.1.3.0=1(Int32,text);.1.3.6.1.6.3.1.1.4.3.0=.1.3.6.1.4.1.2636.1.1.1.2.109(ObjectIdentifier,text)</parms>
+      <snmp>.1.3.6.1.2.1.14.16.2,undefined,v2,4,6,space</snmp>
+      <snmpHost>10.255.177.23</snmpHost>
+      <source>trapd</source>
+      <time>2018-07-20T18:58:01Z</time>
+      <uei>uei.opennms.org/IETF/OSPF/ospfIfConfigError</uei>
+      <ipAddress>10.255.177.23</ipAddress>
+      <nodeId>86</nodeId>
+      <nodeLabel>txhou5555-f15-DVC-002254</nodeLabel>
+    </lastEvent>
+    <lastEventTime>2018-07-20T18:58:01Z</lastEventTime>
+    <logMessage>&lt;p&gt;			ospfIfConfigError trap received 			ospfRouterId=10.255.177.23 			ospfIfIpAddress=10.255.249.46 			ospfAddressLessIf=0 			ospfPacketSrc=10.1.10.250 			ospfConfigErrorType=7 			ospfPacketType=1&lt;/p&gt;</logMessage>
+    <nodeId>86</nodeId>
+    <nodeLabel>txhou5555-f15-DVC-002254</nodeLabel>
+    <reductionKey>uei.opennms.org/IETF/OSPF/ospfIfConfigError::86:10.255.177.23:10.255.177.23</reductionKey>
+    <suppressedTime>2018-06-09T00:24:11Z</suppressedTime>
+    <suppressedUntil>2018-06-09T00:24:11Z</suppressedUntil>
+    <uei>uei.opennms.org/IETF/OSPF/ospfIfConfigError</uei>
+    <x733ProbableCause>0</x733ProbableCause>
+  </alarm>
+</alarms>

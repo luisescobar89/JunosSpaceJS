@@ -13,27 +13,29 @@ var DAYS_BACK_AT_FIRST_RUN = 14; // for the first init
 var errorMessage = "";
 
 
-
-
-
-
 JunosSpaceJS.prototype = Object.extendsObject(AProbe, {
 	
 	// test the connection with the Junos Space Server
 	testConnection : function() {
 		
-		ms.log("Junos Space testing connection");
+		ms.log("JunosSpaceJS testing connection");
 		
+		var query = this.getQueryForTestConnection(query);
+		ms.log("JunosSpaceJS testConnection query: " + query);
+
 		var retVal = {};
-		var query = '/api/space/opennms/alarms?limit=1';
+
+		try {
 		var response = this.getResponse(query);
 		if (response == null){
 			retVal['status']  = FAILURE.toString();
 			retVal['error_message'] = errorMessage;
 			return retVal;
 		}
-		ms.log('Junos Space Connector Testing Connection response:' + response);		 
+
+		ms.log('JunosSpaceJS Connector Testing Connection response:' + response.getBody());		 
 		ms.log('result:' + response.getStatusCode());
+
 		if (response.getStatusCode() === 200){
 			retVal['status']  = SUCCESS.toString();
 		}
@@ -45,6 +47,12 @@ JunosSpaceJS.prototype = Object.extendsObject(AProbe, {
 			retVal['error_message'] = errorMessage;
 		return retVal;
 
+	} catch (e) {
+		this.addError("Failed to connect to JunosSpace");
+		this.addError(e);
+		retVal['status'] = FAILURE.toString();
+		retVal['error_message'] = errorMessage;
+	}
 		
 	},
 
@@ -52,7 +60,7 @@ JunosSpaceJS.prototype = Object.extendsObject(AProbe, {
 
 execute: function() {
 	
-	ms.log("Junos Space Connector Connector: execute connection ...");
+	ms.log("JunosSpaceJS Connector Connector: execute connection ...");
 	
 	var retVal = {};
 	
@@ -159,7 +167,7 @@ filterEvent : function (latestTimestamp, event) {
 },
 
 getQueryForTestConnection : function () {
-	var query = "";
+	var query = "/api/space/opennms/alarms?limit=1";
 	return query;
 },
 
@@ -176,12 +184,6 @@ getQueryForExecute : function () {
 	}
 	
 	return query;
-},
-
-getResponse: function(query) {
-	//return parsed response according to the query type (such as REST or DB);
-	
-	// for example: return this.getResponseJSON(query);
 },
 
 getURL : function (host, query) {
@@ -215,6 +217,31 @@ createRequest: function(query) {
 	// return request;
 },
 
+getResponse: function(query) {
+	//return parsed response according to the query type (such as REST or DB);
+	
+	// for example: return this.getResponseJSON(query);
+	var request = this.createRequest(query);
+	var response = request.get();
+	if (response == null)
+		this.addError(request.getErrorMessage());
+	return response;
+},
+
+//helper method - creates HTTP request and returns the response as XML string
+getResponseFromQuery: function(startTime) {
+	var request = this.createRequest(query);
+
+	var query = '/api/space/opennms/alarms?limit=1';
+
+	request.addHeader('Content-Type','application/xml');
+	request.addHeader('Accept','application/xml');
+	var response = request.post(getXmlString());
+	if (response == null)
+		this.addError(request.getErrorMessage());
+	return response;
+},
+
 getResult : function (query) {
 	
 	//Run the query
@@ -228,13 +255,7 @@ return response; // if needed, parse the response before returning. For example,
 
 },
 
-addError : function(message){
-	if (errorMessage === "")
-		errorMessage = message;
-	else
-		errorMessage += "\n" + message;
-	ms.log(message);
-},
+
 
 //helper method - creates HTTP request and returns the response as JSON string
 getResponseJSON: function(query) {
@@ -246,16 +267,7 @@ getResponseJSON: function(query) {
 	return response;
 },
 
-//helper method - creates HTTP request and returns the response as XML string
-getResponseXML: function(query) {
-	var request = this.createRequest(query);
-	request.addHeader('Content-Type','application/xml');
-	request.addHeader('Accept','application/xml');
-	var response = request.post(getXmlString());
-	if (response == null)
-		this.addError(request.getErrorMessage());
-	return response;
-},
+
 
 //helper method - returns the suitable XML string
 getXmlString: function() {
@@ -271,7 +283,16 @@ parseToJSON : function (response) {
 	return resultJson;
 	
 },
+
+addError : function(message){
+	if (errorMessage === "")
+		errorMessage = message;
+	else
+		errorMessage += "\n" + message;
+	ms.log(message);
+},
+
 	
-type: "ConnectorJS"
+type: "JunosSpaceJS"
 });
 
