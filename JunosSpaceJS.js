@@ -93,7 +93,7 @@ execute: function() {
 		return retVal;
 	}
 	
-	ms.log("Connector Connector: sent " + events.length +
+	ms.log("JunosSpaceJS Connector: sent " + events.length +
 	" events. Return to instance: status="+retVal['status'] +
 	"  lastDiscoverySignature=" + retVal['last_event'] );
 	
@@ -143,8 +143,8 @@ createSNEvent : function (rawEvent) { //get all cached information as well
 var event = Event();
 
 var emsName =  this.probe.getParameter("connector_name");
-event.setEmsSystem(emsName);
-event.setSource("");
+event.setEmsSystem(emsName); //set the connector instance name as source instance
+event.setSource("JunosSpace"); 
 
 //set all event fields
 event.setSeverity(""); //set severity value 1-critical to 4-warning
@@ -173,12 +173,13 @@ getQueryForTestConnection : function () {
 
 getQueryForExecute : function () {
 	
-	var query = "";
-	
 	var latestTimestamp = this.probe.getParameter("last_event");
+
+	var query = "/opennms/rest2/alarms?" + "limit=" + MAX_EVENTS_TO_FETCH;
 	//differ between first action of pulling and other
 	if (latestTimestamp != null) {
-		query = query + "";
+		 //Junos Space Date Format: 2013-06-14T20:41:45
+		query = query + "_s=lastEventTime=gt=" + latestTimestamp;
 	} else {
 		query = query + ""; //first cycle collection
 	}
@@ -189,7 +190,10 @@ getQueryForExecute : function () {
 getURL : function (host, query) {
 	//var port =  this.probe.getAdditionalParameter("port"); //retrieve all additional parameters unique to this Source
 	
-	var url = "";
+	var port =  this.probe.getAdditionalParameter("port").trim();; //retrieve all additional parameters unique to this Source
+	var protocol = this.probe.getAdditionalParameter("protocol").trim();
+
+	var url = protocol + "://" + host + query;
 	return url;
 },
 
@@ -198,14 +202,8 @@ createRequest: function(query) {
 	var username =  this.probe.getParameter("username");
 	var password =  this.probe.getParameter("password");
 	var host =  this.probe.getParameter("host").trim();
-	var protocol = this.probe.getAdditionalParameter("protocol").trim();
-	var port = this.probe.getAdditionalParameter("port").trim();
-
-	if (port && (''+port).trim().length) {
-		host = host + ":" + port;
-	}
-	
-	var url = protocol + "://" + host + query;
+		
+	var url = this.getURL(host, query);
 	ms.log("JunosSpaceJS Connector: URL is " + url);
 	var request = new HTTPRequest(url);
 	request.setBasicAuth(username, password);
